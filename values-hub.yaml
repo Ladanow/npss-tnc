@@ -15,7 +15,9 @@ clusterGroup:
   - npss-tnc-vms
   - openshift-local-storage
   - openshift-storage  
-  
+  - openshift-cnv
+  - quay-enterprise
+
   subscriptions:
     acm:
       name: advanced-cluster-management
@@ -30,7 +32,13 @@ clusterGroup:
       name: odf-operator
       namespace: openshift-storage  
 
+    cnv:
+      name: kubevirt-hyperconverged
+      namespace: openshift-cnv
 
+    quay:
+      name: quay-operator
+      namespace: quay-enterprise    
 
 #     disable: true
 
