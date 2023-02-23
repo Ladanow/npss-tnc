@@ -44,7 +44,7 @@ clusterGroup:
     prometheus:
       name: prometheus
       namespace: service-telemetry    
-
+      channel: beta
 #     disable: true
 
 #    kubevirt-hyperconverged:
