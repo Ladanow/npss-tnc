@@ -17,6 +17,7 @@ clusterGroup:
   - openshift-storage  
   - openshift-cnv
   - quay-enterprise
+  - service-telemetry
 
   subscriptions:
     acm:
@@ -39,6 +40,10 @@ clusterGroup:
     quay:
       name: quay-operator
       namespace: quay-enterprise    
+  
+    prometheus:
+      name: prometheus
+      namespace: service-telemetry    
 
 #     disable: true
 
