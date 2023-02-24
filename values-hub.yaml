@@ -80,6 +80,11 @@ clusterGroup:
       project: hub
       path: common/golang-external-secrets
 
+    cnv:
+      name: kubevirt-hyperconverged
+      namespace: openshift-cnv
+      path: charts/mgt-hub/cnv  
+
   imperative:
     # NOTE: We *must* use lists and not hashes. As hashes lose ordering once parsed by helm
     # The default schedule is every 10 minutes: imperative.schedule
