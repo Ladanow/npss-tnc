@@ -86,11 +86,11 @@ clusterGroup:
       path: charts/mgt-hub/cnv  
       project: hub
 
-        #  odf:
-      # name:
-        # namespace:
-        # path: 
-     # project: hub
+    odf:
+      name: odf
+      namespace: openshift-storage
+      path: charts/mgt-hub/openshift-data-foundations  
+      project: hub
 
   imperative:
     # NOTE: We *must* use lists and not hashes. As hashes lose ordering once parsed by helm
