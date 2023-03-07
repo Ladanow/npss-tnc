@@ -41,7 +41,8 @@ clusterGroup:
     quay:
       name: quay-operator
       namespace: quay-enterprise    
-  
+      channel: stable-3.7
+
         #    prometheus:
         #      name: prometheus
         #      namespace: service-telemetry    
