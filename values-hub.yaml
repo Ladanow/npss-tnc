@@ -17,6 +17,7 @@ clusterGroup:
   - openshift-storage  
   - openshift-cnv
   - quay-enterprise
+  - policies  
     #  - service-telemetry
 
   subscriptions:
