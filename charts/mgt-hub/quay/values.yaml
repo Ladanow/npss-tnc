@@ -8,7 +8,7 @@ quay:
     - name: mirror
       managed: true
     - name: monitoring
-      managed: true
+      managed: false
     - name: postgres
       managed: true
     - name: redis
