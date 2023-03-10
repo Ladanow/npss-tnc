@@ -43,10 +43,10 @@ clusterGroup:
       namespace: quay-enterprise    
       channel: stable-3.7
 
-        #    prometheus:
-        #      name: prometheus
-        #      namespace: service-telemetry    
-        #      channel: beta
+    prometheus:
+      name: prometheus
+      namespace: service-telemetry    
+      channel: beta
 #     disable: true
 
 #    kubevirt-hyperconverged:
