@@ -18,7 +18,7 @@ clusterGroup:
   - openshift-cnv
   - quay-enterprise
   - policies  
-    #  - service-telemetry
+  - service-telemetry
 
   subscriptions:
     acm:
