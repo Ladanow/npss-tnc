@@ -19,6 +19,10 @@ clusterGroup:
   - quay-enterprise
   - policies  
   - service-telemetry
+  - kafka-cluster 
+  - openshift-operators-redhat
+  - openshift-logging  
+
 
   subscriptions:
     acm:
@@ -48,6 +52,18 @@ clusterGroup:
       namespace: service-telemetry    
       channel: beta
       source: community-operators
+ 
+    kafka:
+      name: amq-streams
+      namespace: kafka-cluster 
+   
+    elasticsearch:
+      name: elasticsearch-operator
+      namespace: openshift-operators-redhat
+
+    logging:
+      name: cluster-logging
+      namespace: openshift-logging
 
 #     disable: true
 
