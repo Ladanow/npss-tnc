@@ -38,7 +38,7 @@ spec:
         tls: true
         type: route
     replicas: 3
-    version: 3.1.0
+    version: 3.3.1
   entityOperator:
     topicOperator: {}
     userOperator: {}
