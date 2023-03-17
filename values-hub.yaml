@@ -123,7 +123,13 @@ clusterGroup:
       namespace: kafka-cluster
       path: charts/mgt-hub/kafka
       project: hub
-
+ 
+    logging:
+      name: logging
+      namespace: openshift-logging
+      path: charts/mgt-hub/logging
+      project: hub
+        
   imperative:
     # NOTE: We *must* use lists and not hashes. As hashes lose ordering once parsed by helm
     # The default schedule is every 10 minutes: imperative.schedule
