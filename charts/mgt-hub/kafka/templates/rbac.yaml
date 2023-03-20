@@ -53,7 +53,7 @@ roleRef:
   name: clusteradmin
 subjects:
 - kind: ServiceAccount
-  name: strimzi-cluster-operator-admin
+  name: strimzi-cluster-operator
   namespace: kafka-cluster
 
 
