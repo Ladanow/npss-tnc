@@ -125,10 +125,10 @@ clusterGroup:
       path: charts/mgt-hub/kafka
       project: hub
 
-    monitring:
+    monitoring:
       name: monitring
       namespace: prom-kafka-adapter
-      path: charts/mgt-hub/monitring
+      path: charts/mgt-hub/monitoring
       project: hub  
 
     logging:
