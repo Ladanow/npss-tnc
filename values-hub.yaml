@@ -126,7 +126,7 @@ clusterGroup:
       project: hub
 
     monitoring:
-      name: monitring
+      name: monitoring
       namespace: prom-kafka-adapter
       path: charts/mgt-hub/monitoring
       project: hub  
