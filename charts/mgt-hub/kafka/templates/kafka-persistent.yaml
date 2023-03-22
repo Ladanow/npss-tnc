@@ -8,6 +8,12 @@ metadata:
   namespace: kafka-cluster
 spec:
   kafka:
+    template:
+      pod:
+        securityContext:
+          runAsUser: 1001
+          runAsGroup: 1001
+          fsGroup: 1001
     config:
       default.replication.factor: 3
       inter.broker.protocol.version: '3.3'
