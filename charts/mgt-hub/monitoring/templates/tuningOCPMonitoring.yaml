@@ -9,7 +9,7 @@ data:
     enableUserWorkload: true
     prometheusK8s:
       remoteWrite:
-        - url: "http://172.30.51.185:8080/receive"
+        - url: "http://172.30.164.191:8080/receive"
       # Keep data stored for 1 days
       retention: 1d
       volumeClaimTemplate:
