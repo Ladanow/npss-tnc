@@ -23,6 +23,7 @@ clusterGroup:
     #  - openshift-operators-redhat
     #  - openshift-logging  
   - prom-kafka-adapter 
+  - edge-gitops-vms
 
   subscriptions:
     acm:
@@ -136,7 +137,13 @@ clusterGroup:
       namespace: openshift-logging
       path: charts/mgt-hub/logging
       project: hub
-        
+  
+    edge-gitops-vms:
+      name: edge-gitops-vms
+      namespace: edge-gitops-vms
+      path: charts/mgt-hub/gitops-vms
+      project: hub    
+
   imperative:
     # NOTE: We *must* use lists and not hashes. As hashes lose ordering once parsed by helm
     # The default schedule is every 10 minutes: imperative.schedule
