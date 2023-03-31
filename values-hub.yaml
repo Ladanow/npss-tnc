@@ -24,14 +24,8 @@ clusterGroup:
     #  - openshift-logging  
   - prom-kafka-adapter 
   - edge-gitops-vms
-  - openshift-performance-addon-operator
   - mano-apps
   - mano-automation
-
-  operatorgroupExcludes:
-  - openshift-performance-addon-operator
-
-
 
   subscriptions:
     acm:
@@ -154,6 +148,13 @@ clusterGroup:
       namespace: edge-gitops-vms
       path: charts/mgt-hub/gitops-vms
       project: hub    
+
+    mc:    
+      name: mc
+      path: charts/mgt-hub/mc  
+      namespace: openshift-performance-addon-operator
+      project: hub
+
 
   imperative:
     # NOTE: We *must* use lists and not hashes. As hashes lose ordering once parsed by helm
