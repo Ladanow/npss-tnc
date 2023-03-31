@@ -28,6 +28,11 @@ clusterGroup:
   - mano-apps
   - mano-automation
 
+  operatorgroupExcludes:
+  - openshift-performance-addon-operator
+
+
+
   subscriptions:
     acm:
       name: advanced-cluster-management
