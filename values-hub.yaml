@@ -25,6 +25,8 @@ clusterGroup:
   - prom-kafka-adapter 
   - edge-gitops-vms
   - openshift-performance-addon-operator
+  - mano-apps
+  - mano-automation
 
   subscriptions:
     acm:
