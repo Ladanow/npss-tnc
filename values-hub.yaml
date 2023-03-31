@@ -24,6 +24,7 @@ clusterGroup:
     #  - openshift-logging  
   - prom-kafka-adapter 
   - edge-gitops-vms
+  - openshift-performance-addon-operator
 
   subscriptions:
     acm:
@@ -65,7 +66,10 @@ clusterGroup:
     logging:
       name: cluster-logging
       namespace: openshift-logging
-
+   
+    pao:
+      name: performance-addon-operator
+      namespace: openshift-performance-addon-operator    
         
 #     disable: true
 
