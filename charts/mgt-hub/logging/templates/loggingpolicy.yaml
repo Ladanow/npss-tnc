@@ -20,6 +20,14 @@ metadata:
     argocd.argoproj.io/managed-by: {{ $.Values.global.pattern }}-{{ $.Values.clusterGroup.name }}
 
 ---
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    argocd.argoproj.io/instance: mc
+  name: openshift-performance-addon-operator
+
+---
 apiVersion: operators.coreos.com/v1
 kind: OperatorGroup
 metadata:
@@ -36,6 +44,13 @@ metadata:
 spec:
   targetNamespaces:
   - openshift-logging
+
+---
+apiVersion: operators.coreos.com/v1
+kind: OperatorGroup
+metadata:
+  name: openshift-performance-addon-operator
+  namespace: openshift-performance-addon-operator
 
 
 ---
