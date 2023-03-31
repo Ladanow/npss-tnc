@@ -11,16 +11,6 @@ metadata:
   name: openshift-performance-addon-operator
   namespace: openshift-performance-addon-operator
 ---
-apiVersion: operators.coreos.com/v1alpha1
-kind: Subscription
-metadata:
-  name: openshift-performance-addon-operator-subscription
-  namespace: openshift-performance-addon-operator
-spec:
-  channel: "4.10" 
-  name: performance-addon-operator
-  source: redhat-operators 
-  sourceNamespace: openshift-marketplace
 
 # https://docs.openshift.com/container-platform/4.10/scalability_and_performance/cnf-performance-addon-operator-for-low-latency-nodes.html
 
