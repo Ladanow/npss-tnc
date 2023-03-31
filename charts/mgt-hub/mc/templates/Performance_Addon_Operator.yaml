@@ -12,7 +12,6 @@ spec:
   cpu:     
     reserved: 0-3,56-59
     isolated: 4-7
-  memory: "16Gi"
   nodeSelector:
     node-role.kubernetes.io/master: ""
 
