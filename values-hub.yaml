@@ -75,10 +75,10 @@ clusterGroup:
 
     Talam:
       name: topology-aware-lifecycle-manager
-        #      namespace: test-talam
       namespace: openshift-performance-addon-operator
-    
-        
+      source: redhat-operators
+      channel: stable 
+
 #     disable: true
 
 #    kubevirt-hyperconverged:
