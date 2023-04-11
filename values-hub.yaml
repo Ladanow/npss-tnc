@@ -26,6 +26,7 @@ clusterGroup:
   - edge-gitops-vms
   - mano-apps
   - mano-automation
+  - test-talam  
 
   subscriptions:
     acm:
@@ -74,7 +75,8 @@ clusterGroup:
 
     Talam:
       name: topology-aware-lifecycle-manager
-      namespace: openshift-performance-addon-operator
+      namespace: test-talam
+        #      namespace: openshift-performance-addon-operator
     
         
 #     disable: true
