@@ -75,8 +75,8 @@ clusterGroup:
 
     Talam:
       name: topology-aware-lifecycle-manager
-      namespace: test-talam
-        #      namespace: openshift-performance-addon-operator
+        #      namespace: test-talam
+      namespace: openshift-performance-addon-operator
     
         
 #     disable: true
