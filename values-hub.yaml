@@ -26,7 +26,6 @@ clusterGroup:
   - edge-gitops-vms
   - mano-apps
   - mano-automation
-  - openshift-performance-addon-operator
 
   subscriptions:
     acm:
