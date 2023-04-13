@@ -21,7 +21,7 @@
 #   namespace: openshift-performance-addon-operator
 # 
 # 
----
+#---
 #apiVersion: performance.openshift.io/v2
 #kind: PerformanceProfile
 #metadata:
