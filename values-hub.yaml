@@ -157,7 +157,7 @@ clusterGroup:
     mc:    
       name: mc
       path: charts/mgt-hub/mc  
-      namespace: openshift-performance-addon-operator
+        #      namespace: openshift-performance-addon-operator
       project: hub
 
 
