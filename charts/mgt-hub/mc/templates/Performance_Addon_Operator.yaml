@@ -22,19 +22,19 @@
 # 
 # 
 ---
-apiVersion: performance.openshift.io/v2
-kind: PerformanceProfile
-metadata:
-  name: systemreservedset
-  annotations:
-    kubeletconfig.experimental: |
-      {"allowedUnsafeSysctls":["net.core.somaxconn"]}
-spec:
-  cpu:     
-    reserved: 0-3,8-15
-    isolated: 4-7
-  nodeSelector:
-    node-role.kubernetes.io/master: ""
-
+#apiVersion: performance.openshift.io/v2
+#kind: PerformanceProfile
+#metadata:
+#  name: systemreservedset
+#  annotations:
+#    kubeletconfig.experimental: |
+#      {"allowedUnsafeSysctls":["net.core.somaxconn"]}
+#spec:
+#  cpu:     
+#    reserved: 0-3,8-15
+#    isolated: 4-7
+#  nodeSelector:
+#    node-role.kubernetes.io/master: ""
+#
 
 

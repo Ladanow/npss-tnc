@@ -69,9 +69,9 @@ clusterGroup:
       name: cluster-logging
       namespace: openshift-logging
    
-    pao:
-      name: performance-addon-operator
-      namespace: openshift-performance-addon-operator    
+        #    pao:
+        #      name: performance-addon-operator
+        #      namespace: openshift-performance-addon-operator    
 
         #    Talam:
         #      name: topology-aware-lifecycle-manager
