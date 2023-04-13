@@ -31,7 +31,7 @@ metadata:
       {"allowedUnsafeSysctls":["net.core.somaxconn"]}
 spec:
   cpu:     
-    reserved: 0-3,5-15
+    reserved: 0-3,8-15
     isolated: 4-7
   nodeSelector:
     node-role.kubernetes.io/master: ""
