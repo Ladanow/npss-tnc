@@ -28,7 +28,7 @@ metadata:
   name: openshift-performance-addon-operator-subscription
   namespace: openshift-performance-addon-operator
 spec:
-  channel: 4.10
+  channel: "4.10"
   name: performance-addon-operator
   source: redhat-operators 
   sourceNamespace: openshift-marketplace
