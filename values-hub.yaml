@@ -10,7 +10,7 @@ clusterGroup:
 
   namespaces:
   - open-cluster-management #for ACM
-    #  - vault
+  - vault
   - golang-external-secrets
   - npss-tnc-vms
   - openshift-local-storage
@@ -100,12 +100,12 @@ clusterGroup:
         jsonPointers:
           - /spec/loggingCA
 
-            #    vault:
-            #      name: vault
-            #      namespace: vault
-            #      project: hub
-            #      path: common/hashicorp-vault
-            #
+    vault:
+      name: vault
+      namespace: vault
+      project: hub
+      path: common/hashicorp-vault
+
     golang-external-secrets:
       name: golang-external-secrets
       namespace: golang-external-secrets
