@@ -28,6 +28,7 @@ We can drop this local patch when any one the two conditions is true:
 oc rsh vault-0
 vault token lookup 
 
+```
 sh-4.4$ vault token lookup
 Key                 Value
 ---                 -----
@@ -46,3 +47,4 @@ path                auth/token/root
 policies            [root]
 ttl                 0s
 type                service
+```
