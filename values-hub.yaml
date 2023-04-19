@@ -4,9 +4,6 @@
 clusterGroup:
   name: hub
   isHubCluster: true
-  # Note: setting this to true stores the vault unseal keys inside a cluster secret and
-  # is fundamentally insecure
-  #  insecureUnsealVaultInsideCluster: true
 
   namespaces:
   - open-cluster-management #for ACM
@@ -22,10 +19,12 @@ clusterGroup:
   - kafka-cluster 
     #  - openshift-operators-redhat
     #  - openshift-logging  
+  - openshift-operators-redhat
   - prom-kafka-adapter 
   - edge-gitops-vms
   - mano-apps
   - mano-automation
+    #  - openshift-logging  
     #  - openshift-performance-addon-operator
 
   subscriptions:
@@ -73,7 +72,7 @@ clusterGroup:
         #      name: performance-addon-operator
         #      namespace: openshift-performance-addon-operator    
 
-    Talam:
+    talam:
       name: topology-aware-lifecycle-manager
       namespace: openshift-operators 
 
@@ -151,13 +150,12 @@ clusterGroup:
     edge-gitops-vms:
       name: edge-gitops-vms
       namespace: edge-gitops-vms
-      path: charts/mgt-hub/gitops-vms
-      project: hub    
+      project: hub
+      path: charts/mgt-hub/edge-gitops-vms
 
     mc:    
       name: mc
       path: charts/mgt-hub/mc  
-        #      namespace: openshift-performance-addon-operator
       project: hub
 
 
@@ -175,6 +173,29 @@ clusterGroup:
       # per playbook timeout in seconds
       timeout: 234
       # verbosity: "-v"
+    - name: deploy-kubevirt-worker
+      playbook: ansible/deploy_kubevirt_worker.yml
+      verbosity: -vvv
+    - name: configure-aap-controller
+      playbook: ansible/imperative_configure_controller.yml
+      image: quay.io/hybridcloudpatterns/ansible-edge-gitops-ee:latest
+      verbosity: -vvv
+      timeout: "900"
+    clusterRoleYaml:
+    - apiGroups:
+        - "*"
+      resources:
+        - machinesets
+      verbs:
+        - "*"
+    - apiGroups:
+        - "*"
+      resources:
+        - "*"
+      verbs:
+        - get
+        - list
+        - watch
 
   managedClusterGroups:
     exampleRegion:
