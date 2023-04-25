@@ -11,9 +11,12 @@ for additional context and installation instructions
 
 
 
-#vault token
-oc rsh $POD
-vault operator init --tls-skip-verify -key-shares=1 -key-threshold=1
+ #vault token
+ oc rsh $POD
+ vault operator init --tls-skip-verify -key-shares=1 -key-threshold=1
 
  vault token lookup ==> id 
+
+
+
 
