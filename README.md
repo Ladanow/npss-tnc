@@ -12,6 +12,7 @@ for additional context and installation instructions
 
 
  #vault token
+ use imparative NameSpace, get the vault secrets
  oc rsh $POD
  vault operator init --tls-skip-verify -key-shares=1 -key-threshold=1
 
