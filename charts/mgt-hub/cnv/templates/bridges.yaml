@@ -18,7 +18,7 @@ spec:
           stp:
             enabled: false
         port:
-          - name: app-port
+          - name: ens6.410 
     - name: br-automation
       type: linux-bridge
       state: up
@@ -30,6 +30,6 @@ spec:
           stp:
             enabled: false
         port:
-          - name: auto-port
+          - name: ens6.420
 
 
