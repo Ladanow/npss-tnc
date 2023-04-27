@@ -1,0 +1,25 @@
+
+
+apiVersion: nmstate.io/v1
+kind: NodeNetworkConfigurationPolicy
+metadata:
+  name: vlan-410-420
+spec:
+  nodeSelector:
+    kubernetes.io/hostname: ip-10-0-138-247.us-east-2.compute.internal
+  desiredState:
+    interfaces:
+    - name: ens6.410
+      description: VLAN 410
+      type: vlan
+      state: up
+      vlan:
+        base-iface: ens6
+        id: 410
+    - name: ens6.420
+      description: VLAN 420
+      type: vlan
+      state: up
+      vlan:
+        base-iface: ens6
+        id: 420
