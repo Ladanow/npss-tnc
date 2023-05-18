@@ -26,6 +26,7 @@ clusterGroup:
   - mano-automation
     #  - openshift-logging  
     #  - openshift-performance-addon-operator
+  - ansible
 
   subscriptions:
     acm:
@@ -75,6 +76,12 @@ clusterGroup:
     talam:
       name: topology-aware-lifecycle-manager
       namespace: openshift-operators 
+
+    ansible:
+      name: ansible-automation-platform-operator
+      namespace: ansible 
+      source: redhat-operators
+      channel: stable-2.3
 
 #     disable: true
 
