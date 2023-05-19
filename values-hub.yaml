@@ -165,6 +165,14 @@ clusterGroup:
       path: charts/mgt-hub/mc  
       project: hub
 
+    ansible:
+      name: ansible
+      path: charts/mgt-hub/ansible
+      project: hub
+
+
+
+
 
   imperative:
     # NOTE: We *must* use lists and not hashes. As hashes lose ordering once parsed by helm
