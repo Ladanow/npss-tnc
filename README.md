@@ -12,6 +12,31 @@ for additional context and installation instructions
 ## Clone repo
 git clone https://github.com/Ladanow/npss-tnc
 
+# install pip3
+sudo yum install pip
+
+sudo yum upgrade python3
+
+    sudo yum update
+    sudo yum upgrade python3
+    sudo update-alternatives --config python3
+    python3 --version
+
+
+ansible-galaxy collection install kubernetes.core
+ ansible-doc -t module kubernetes.core.k8s
+
+
+ pip install kubernetes
+
+ git clone --recursive https://github.com/kubernetes-client/python.git
+
+ cd python
+  sudo python setup.py install
+
+
+
+@ install pip3
 
 
 
