@@ -9,6 +9,10 @@ or how to use it, head over to [Multicloud GitOps](http://hybrid-cloud-patterns.
 for additional context and installation instructions
 
 
+## Clone repo
+git clone https://github.com/Ladanow/npss-tnc
+
+
 
 
  #vault token
