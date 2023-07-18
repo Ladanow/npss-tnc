@@ -95,6 +95,8 @@ spec:
                     automated:
                       prune: false
                       selfHeal: true
+                    retry:
+                      limit: {{ default 20 $.Values.global.options.applicationRetryLimit }}
                   ignoreDifferences:
                   - group: apps
                     kind: Deployment
@@ -124,6 +126,8 @@ apiVersion: apps.open-cluster-management.io/v1
 kind: PlacementRule
 metadata:
   name: {{ .name }}-placement
+  annotations:
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
 spec:
   clusterConditions:
     - status: 'True'
