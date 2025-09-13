@@ -1,0 +1,558 @@
+apiVersion: siteconfig.open-cluster-management.io/v1alpha1
+kind: ClusterInstance
+metadata:
+  name: "mano1"
+  namespace: "mano1"
+spec:
+  holdInstallation: false
+
+  baseDomain: "npss.bos2.lab"
+  pullSecretRef:
+    name: "assisted-deployment-pull-secret" 
+  clusterImageSetNameRef: "openshift-4.18-disconnected"  
+  sshPublicKey: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCoTs4d+rzDW9vDXr5eo0w/tBLOXR9gdlCaqYBX6E4WdLxGOFLT1vB+VyMRaLg1xkI3mmqLTCF4QLfzmnQVsNps9iEyWHF7eP4IZj0FfmAFQDXptOVpRgjnVzM0Q4VBKhyUto5JQrhuqD8BM0FieQhZoEmccvkeCwCiPcjP005bVcEq9mdDCWVZYKL4EPxSXkoNSjgxL50lYc9arOrpztj9ANfk4mCP3JjpvrOPZhT+jWuf6cadUemiGC7n6iPUOY5IhiyeWU+buP60DJwF2hQfcle3GjAozkCMFB+U6YhpEgIgFlGgHERl2X0lS/lazxqgFn4OVR9MLOx/QkETnMKP8jH0LqhZCL6jPIJSNnPGJ424TXPowlZ3jRNxNxiuFsD7quSN3r4FJFkARsk19Wq3J6J82dZzKE7wMzMHOy8hgATq917tTvP39T5T3SM9PumHQmtAYaai4ZgCALMLvIwtqBpDc/stagy1QbDGY3mzXB52/9S3jjUEmHMK1YuKj58= mano2@bastion"
+  clusterName: "mano1"
+  networkType: "OVNKubernetes"
+  clusterNetwork:
+    - cidr: 10.128.0.0/14
+      hostPrefix: 23
+    - cidr: fd02::/48
+      hostPrefix: 64
+
+  machineNetwork:
+    - cidr: 172.31.41.0/24
+    - cidr: fd00:2023:41::/48
+  apiVIPs: 
+    - 172.31.41.4
+    - fd00:2023:41::4
+  ingressVIPs: 
+    - 172.31.41.5
+    - fd00:2023:41::5
+  serviceNetwork:
+    - cidr: 172.30.0.0/16
+    - cidr: fd03::/112
+  
+  additionalNTPSources:
+    - 172.31.61.2
+    - 192.168.22.2
+  
+
+#  cpuPartitioningMode: AllNodes
+  extraLabels:
+    ManagedCluster:
+      config-ver: "2025-05-01"
+      hub: "true"  
+#      odf-int: "true"
+#      ldap-server: idm1mgmt1.npss.bos2.lab
+  templateRefs:
+    - name: ai-cluster-templates-v1
+      namespace: open-cluster-management
+  extraManifestsRefs:
+    - name: extra-manifests-sno 
+
+#spec:
+#  clusters:
+#    extraManifests:
+#      searchPaths:
+#        - ../policies/config-ver-2025-05-01/source-crs/manifests/
+#    crTemplates:
+#      KlusterletAddonConfig: "addons/KlusterletAddonConfigOverride.yaml"
+#################################################################
+  nodes:
+    - hostName: "mgmt1-m1"
+      role: "master"
+      bmcAddress: "idrac-virtualmedia+https://192.168.22.150/redfish/v1/Systems/System.Embedded.1"
+      bmcCredentialsName:
+        name: "bmh-secret-v1"
+      bootMACAddress: "30:3E:A7:03:08:F0"
+      bootMode: "UEFISecureBoot"  
+      rootDeviceHints:
+        wwn: "0x6f4ee08057eaa100662faace8b66cd52"      
+      automatedCleaningMode: "metadata"
+      nodeLabels:
+        cluster.ocs.openshift.io/openshift-storage: "true"
+#        isthisnode1: "true"
+      templateRefs:
+        - name: ai-node-templates-v1
+          namespace: open-cluster-management
+      nodeNetwork:
+        interfaces:
+          - name: "eno12399"
+            macAddress: "30:3E:A7:03:08:F0"
+          - name: "eno12409"
+            macAddress: "30:3E:A7:03:08:F1"
+          - name: "eno12419"
+            macAddress: "30:3E:A7:03:08:F2"
+          - name: "eno12429"
+            macAddress: "30:3E:A7:03:08:F3"
+        config:
+          interfaces:
+            - name: bond0
+              description: "Bond 0"
+              type: bond
+              state: up
+              mtu: 8950
+              ipv4:
+                address:
+                - ip: 172.31.41.6
+                  prefix-length: 24
+                enabled: true
+              ipv6:
+                address:
+                - ip: fd00:2023:41::6
+                  prefix-length: 48
+                enabled: true                
+              link-aggregation:
+                mode: '802.3ad'
+                options:
+                  miimon: '1500'
+                port:
+                  - eno12399
+                  - eno12409
+#            - name: bond1
+#              description: "Bond 1"
+#              type: bond
+#              state: up
+#              mtu: 8950
+#              ipv4:
+#                enabled: false
+#              ipv6:
+#                enabled: false                
+#              link-aggregation:
+#                mode: '802.3ad'
+#                options:
+#                  miimon: '1500'
+#                port:
+#                  - eno12419
+#                  - eno12429
+#            - name: bond1.42
+#              type: vlan
+#              state: up
+#              mtu: 8950
+#              vlan:
+#                base-iface: bond1
+#                id: 42
+#              ipv4:
+#                enabled: true
+#              ipv6:
+#                enabled: true
+
+            - name: eno12399
+              type: ethernet
+              state: up
+              mtu: 8950
+              ipv4:
+                enabled: false
+              ipv6:
+                enabled: false
+            - name: eno12409
+              type: ethernet
+              state: up
+              mtu: 8950
+              ipv4:
+                enabled: false
+              ipv6:
+                enabled: false
+            - name: eno12419
+              type: ethernet
+              state: up
+              mtu: 8950
+              ipv4:
+                enabled: false
+              ipv6:
+                enabled: false
+            - name: eno12429
+              type: ethernet
+              state: up
+              mtu: 8950
+              ipv4:
+                enabled: false
+              ipv6:
+                enabled: false
+          dns-resolver:
+            config:
+              server:
+                - 192.168.22.4
+          routes:
+            config:
+              - destination: 0.0.0.0/0
+                next-hop-address: 172.31.41.1
+                next-hop-interface: bond0
+              - destination: ::/0
+                next-hop-address: fd00:2023:41::1
+                next-hop-interface: bond0
+
+##########################################################
+    - hostName: "mgmt1-m2"
+      role: "master"
+      bmcAddress: "idrac-virtualmedia+https://192.168.22.151/redfish/v1/Systems/System.Embedded.1"
+      bmcCredentialsName:
+        name: "bmh-secret-v1"
+      bootMACAddress: "30:3E:A7:03:0A:90"
+      bootMode: "UEFISecureBoot" 
+      rootDeviceHints:
+        wwn: "0x6f4ee08057eacd00662fab4e5c3b4263"
+      automatedCleaningMode: "metadata"
+      nodeLabels:
+        cluster.ocs.openshift.io/openshift-storage: "true"
+      templateRefs:
+        - name: ai-node-templates-v1
+          namespace: open-cluster-management
+      nodeNetwork:
+        interfaces:
+          - name: "eno12399"
+            macAddress: "30:3E:A7:03:0A:90"
+          - name: "eno12409"
+            macAddress: "30:3E:A7:03:0A:91"
+          - name: "eno12419"
+            macAddress: "30:3E:A7:03:0A:92"
+          - name: "eno12429"
+            macAddress: "30:3E:A7:03:0A:93"
+        config:
+          interfaces:
+            - name: bond0
+              description: "Bond 0"
+              type: bond
+              state: up
+              mtu: 8950
+              ipv4:
+                address:
+                - ip: 172.31.41.7
+                  prefix-length: 24
+                enabled: true
+              ipv6:
+                address:
+                - ip: fd00:2023:41::7
+                  prefix-length: 48
+                enabled: true                
+              link-aggregation:
+                mode: '802.3ad'
+                options:
+                  miimon: '1500'
+                port:
+                  - eno12399
+                  - eno12409
+#            - name: bond1
+#              description: "Bond 1"
+#              type: bond
+#              state: up
+#              mtu: 8950
+#              ipv4:
+#                enabled: false
+#              ipv6:
+#                enabled: false                
+#              link-aggregation:
+#                mode: '802.3ad'
+#                options:
+#                  miimon: '1500'
+#                port:
+#                  - eno12419
+#                  - eno12429
+#            - name: bond1.42
+#              type: vlan
+#              state: up
+#              mtu: 8950
+#              vlan:
+#                base-iface: bond1
+#                id: 42
+#              ipv4:
+#                enabled: true
+#              ipv6:
+#                enabled: true
+
+            - name: eno12399
+              type: ethernet
+              state: up
+              mtu: 8950
+              ipv4:
+                enabled: false
+              ipv6:
+                enabled: false
+            - name: eno12409
+              type: ethernet
+              state: up
+              mtu: 8950
+              ipv4:
+                enabled: false
+              ipv6:
+                enabled: false
+            - name: eno12419
+              type: ethernet
+              state: up
+              mtu: 8950
+              ipv4:
+                enabled: false
+              ipv6:
+                enabled: false
+            - name: eno12429
+              type: ethernet
+              state: up
+              mtu: 8950
+              ipv4:
+                enabled: false
+              ipv6:
+                enabled: false
+          dns-resolver:
+            config:
+              server:
+                - 192.168.22.4
+          routes:
+            config:
+              - destination: 0.0.0.0/0
+                next-hop-address: 172.31.41.1
+                next-hop-interface: bond0
+              - destination: ::/0
+                next-hop-address: fd00:2023:41::1
+                next-hop-interface: bond0
+ 
+ 
+
+##########################################################
+    - hostName: "mgmt1-m3"
+      role: "master"
+      bmcAddress: "idrac-virtualmedia+https://192.168.22.152/redfish/v1/Systems/System.Embedded.1"
+      bmcCredentialsName:
+        name: "bmh-secret-v1"
+      bootMACAddress: "30:3E:A7:03:06:80"
+      bootMode: "UEFISecureBoot" 
+      rootDeviceHints:
+        wwn: "0x6f4ee08057eac400662facdf274e95bb"
+      automatedCleaningMode: "metadata"
+      nodeLabels:
+        cluster.ocs.openshift.io/openshift-storage: "true"
+      templateRefs:
+        - name: ai-node-templates-v1
+          namespace: open-cluster-management
+      nodeNetwork:
+        interfaces:
+          - name: "eno12399"
+            macAddress: "30:3E:A7:03:06:80"
+          - name: "eno12409"
+            macAddress: "30:3E:A7:03:06:81"
+          - name: "eno12419"
+            macAddress: "30:3E:A7:03:06:82"
+          - name: "eno12429"
+            macAddress: "30:3E:A7:03:06:83"
+        config:
+          interfaces:
+            - name: bond0
+              description: "Bond 0"
+              type: bond
+              state: up
+              mtu: 8950
+              ipv4:
+                address:
+                - ip: 172.31.41.8
+                  prefix-length: 24
+                enabled: true
+              ipv6:
+                address:
+                - ip: fd00:2023:41::8
+                  prefix-length: 48
+                enabled: true                
+              link-aggregation:
+                mode: '802.3ad'
+                options:
+                  miimon: '1500'
+                port:
+                  - eno12399
+                  - eno12409
+#            - name: bond1
+#              description: "Bond 1"
+#              type: bond
+#              state: up
+#              mtu: 8950
+#              ipv4:
+#                enabled: false
+#              ipv6:
+#                enabled: false                
+#              link-aggregation:
+#                mode: '802.3ad'
+#                options:
+#                  miimon: '1500'
+#                port:
+#                  - eno12419
+#                  - eno12429
+#            - name: bond1.42
+#              type: vlan
+#              state: up
+#              mtu: 8950
+#              vlan:
+#                base-iface: bond1
+#                id: 42
+#              ipv4:
+#                enabled: true
+#              ipv6:
+#                enabled: true
+
+            - name: eno12399
+              type: ethernet
+              state: up
+              mtu: 8950
+              ipv4:
+                enabled: false
+              ipv6:
+                enabled: false
+            - name: eno12409
+              type: ethernet
+              state: up
+              mtu: 8950
+              ipv4:
+                enabled: false
+              ipv6:
+                enabled: false
+            - name: eno12419
+              type: ethernet
+              state: up
+              mtu: 8950
+              ipv4:
+                enabled: false
+              ipv6:
+                enabled: false
+            - name: eno12429
+              type: ethernet
+              state: up
+              mtu: 8950
+              ipv4:
+                enabled: false
+              ipv6:
+                enabled: false
+          dns-resolver:
+            config:
+              server:
+                - 192.168.22.4
+          routes:
+            config:
+              - destination: 0.0.0.0/0
+                next-hop-address: 172.31.41.1
+                next-hop-interface: bond0
+              - destination: ::/0
+                next-hop-address: fd00:2023:41::1
+                next-hop-interface: bond0
+
+
+
+##########################################################
+    - hostName: "mgmt1-worker1"
+      role: "worker"
+      bmcAddress: "idrac-virtualmedia+https://192.168.22.153/redfish/v1/Systems/System.Embedded.1"        
+      bmcCredentialsName:
+        name: "bmh-secret-v1"
+      bootMACAddress: "30:3E:A7:03:0F:10"
+      bootMode: "UEFISecureBoot" 
+      rootDeviceHints:
+        wwn: "0x6f4ee08057eabd00662fad1210ef738a"             
+      automatedCleaningMode: "metadata"
+      nodeLabels:
+        cluster.ocs.openshift.io/openshift-storage: "true"
+      templateRefs:
+        - name: ai-node-templates-v1
+          namespace: open-cluster-management
+      nodeNetwork:
+        interfaces:
+          - name: "eno12399"
+            macAddress: "30:3E:A7:03:0F:10"
+          - name: "eno12409"
+            macAddress: "30:3E:A7:03:0F:11"
+          - name: "eno12419"
+            macAddress: "30:3E:A7:03:0F:12"
+          - name: "eno12429"
+            macAddress: "30:3E:A7:03:0F:13"
+        config:
+          interfaces:
+            - name: bond0
+              description: "Bond 0"
+              type: bond
+              state: up
+              mtu: 8950
+              ipv4:
+                address:
+                - ip: 172.31.41.9
+                  prefix-length: 24
+                enabled: true
+              ipv6:
+                address:
+                - ip: fd00:2023:41::9
+                  prefix-length: 48
+                enabled: true                
+              link-aggregation:
+                mode: '802.3ad'
+                options:
+                  miimon: '1500'
+                port:
+                  - eno12399
+                  - eno12409
+#            - name: bond1
+#              description: "Bond 1"
+#              type: bond
+#              state: up
+#              mtu: 8950
+#              ipv4:
+#                enabled: false
+#              ipv6:
+#                enabled: false                
+#              link-aggregation:
+#                mode: '802.3ad'
+#                options:
+#                  miimon: '1500'
+#                port:
+#                  - eno12419
+#                  - eno12429
+#            - name: bond1.42
+#              type: vlan
+#              state: up
+#              mtu: 8950
+#              vlan:
+#                base-iface: bond1
+#                id: 42
+#              ipv4:
+#                enabled: true
+#              ipv6:
+#                enabled: true
+#
+            - name: eno12399
+              type: ethernet
+              state: up
+              mtu: 8950
+              ipv4:
+                enabled: false
+              ipv6:
+                enabled: false
+            - name: eno12409
+              type: ethernet
+              state: up
+              mtu: 8950
+              ipv4:
+                enabled: false
+              ipv6:
+                enabled: false
+            - name: eno12419
+              type: ethernet
+              state: up
+              mtu: 8950
+              ipv4:
+                enabled: false
+              ipv6:
+                enabled: false
+            - name: eno12429
+              type: ethernet
+              state: up
+              mtu: 8950
+              ipv4:
+                enabled: false
+              ipv6:
+                enabled: false
+          dns-resolver:
+            config:
+              server:
+                - 192.168.22.4
+          routes:
+            config:
+              - destination: 0.0.0.0/0
+                next-hop-address: 172.31.41.1
+                next-hop-interface: bond0
+              - destination: ::/0
+                next-hop-address: fd00:2023:41::1
+                next-hop-interface: bond0
+
+
